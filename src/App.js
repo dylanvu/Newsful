@@ -1,5 +1,3 @@
-'use strict';
-
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
@@ -13,6 +11,7 @@ class App extends Component {
 
   componentDidMount() {
     this.fetchArticlesTest();
+    this.fetchSourcesTest();
   }
 
   fetchArticlesTest() {
@@ -25,6 +24,13 @@ class App extends Component {
     .catch(err => {
       console.log(err);
     });
+  }
+
+  fetchSourcesTest() {
+    axios.get('api/sources')
+    .then(res => {
+      console.log(res.data);
+    })
   }
 
   render() {
