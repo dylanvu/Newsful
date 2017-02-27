@@ -6,13 +6,21 @@
     "react-scripts": "0.9.2"
   },
   "dependencies": {
+    "axios": "^0.15.3",
+    "express": "^4.14.1",
+    "morgan": "^1.8.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start & nodemon server/bin/www",
+    "start-prod": "env PORT=3000 nodemon server/bin/www",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "proxy": "http://localhost:3001",
+  "engines": {
+    "node": "7.6.0"
   }
 }
