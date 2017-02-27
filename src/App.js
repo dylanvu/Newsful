@@ -15,11 +15,9 @@ class App extends Component {
   }
 
   fetchArticlesTest() {
-    console.log('get');
     axios.get('api')
     .then(res => {
-      console.log(res.data.articles);
-      this.setState({list: res.data.articles});
+      this.setState({list: res.data});
     })
     .catch(err => {
       console.log(err);
@@ -29,7 +27,7 @@ class App extends Component {
   fetchSourcesTest() {
     axios.get('api/sources')
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
     })
   }
 
@@ -40,11 +38,12 @@ class App extends Component {
         <div>
           { list.map(ele => (
             <div key={ele.title}>
-              <img src={ele.urlToImage}/>
+              {/* <img src={ele.urlToImage} alt={ele.title}/> */}
               <p><a href={ele.url}>{ele.title}</a></p>
               <p>{ele.author}</p>
               <p>{ele.description}</p>
               <p>{ele.publishedAt}</p>
+              <p>{ele.source}</p>
             </div>
           ))}
         </div>
