@@ -14,9 +14,10 @@ class App extends Component {
   }
 
   fetchArticlesTest() {
-    axios.get(`https://newsapi.org/v1/articles?source=techcrunch&apiKey=226be9019bc144dfb7d0ebbfb4c8b0cc`)
+    console.log('get');
+    axios.get('api')
     .then(res => {
-      console.log(res);
+      console.log(res.data.articles);
       this.setState({list: res.data.articles});
     })
     .catch(err => {
