@@ -13,7 +13,7 @@
     "react-dom": "^15.4.2"
   },
   "scripts": {
-    "start": "react-scripts start & nodemon server/bin/www",
+    "start": "react-scripts start & nodemon ./server/bin/www",
     "start-prod": "env PORT=3000 nodemon server/bin/www",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
