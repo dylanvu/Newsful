@@ -11,24 +11,16 @@ class App extends Component {
 
   componentDidMount() {
     this.fetchArticlesTest();
-    this.fetchSourcesTest();
   }
 
   fetchArticlesTest() {
-    axios.get('api')
+    axios.get('articles')
     .then(res => {
       this.setState({list: res.data});
     })
     .catch(err => {
       console.log(err);
     });
-  }
-
-  fetchSourcesTest() {
-    axios.get('api/sources')
-    .then(res => {
-      // console.log(res.data);
-    })
   }
 
   render() {

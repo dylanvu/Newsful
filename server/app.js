@@ -9,9 +9,12 @@ const morgan = require('morgan');
 const path = require('path');
 const app = express();
 
+app.disable('x-powered-by');
+
 app.use(morgan('dev'));
 
-app.use('/api', require('./routes/api'));
+app.use(require('./routes/articles'));
+app.use(require('./routes/sources'));
 
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
