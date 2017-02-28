@@ -41,9 +41,10 @@ router.get('/', (req, res) => {
     return Promise.all(toResolve);
   })
   .then(articles => {
-    const flattened = articles.reduce(function(a,  b) {
-      return a.concat(b);
+    const flattened = articles.reduce((acc, arr) => {
+      return acc.concat(arr);
     }, []);
+
     res.send(flattened);
   })
   .catch(err => {
