@@ -41,14 +41,19 @@ router.get('/', (req, res) => {
     return Promise.all(toResolve);
   })
   .then(articles => {
-    const flattened = articles.reduce((acc, arr) => {
+    articles = articles.reduce((acc, arr) => {
       return acc.concat(arr);
     }, []);
 
-    res.send(flattened);
+    articles = articles.sort((a, b) => {
+      return new Date(b.publishedAt) - new Date(a.publishedAt);
+    });
+
+    res.send(articles);
   })
   .catch(err => {
-    console.log(err);
+    res.status(500);
+    res.send(err);
   });
 });
 
@@ -57,8 +62,9 @@ router.get('/sources', (req, res) => {
   .then(sources => {
     res.send(sources);
   })
-  .catch(err =>{
-    console.log(err);
+  .catch(err => {
+    res.status(500);
+    res.send(err);
   })
 });
 
