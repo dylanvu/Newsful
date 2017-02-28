@@ -42,8 +42,10 @@ router.get('/', (req, res) => {
   })
   .then(articles => {
     // TODO: Ask someone what the fuck is going on
-    console.log(articles);
-    res.send(articles);
+    const flattened = articles.reduce(function(a,  b) {
+      return a.concat(b);
+    }, []);
+    res.send(flattened);
   })
   .catch(err => {
     console.log(err);

@@ -17,6 +17,11 @@ class App extends Component {
   fetchArticlesTest() {
     axios.get('api')
     .then(res => {
+      // var flattened = res.data.reduce(function(a,  b) {
+      //   return a.concat(b);
+      // }, []);
+      // console.log(flattened);
+      // this.setState({list: flattened});
       this.setState({list: res.data});
     })
     .catch(err => {
