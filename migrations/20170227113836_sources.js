@@ -3,6 +3,7 @@
 exports.up = function(knex) {
   return knex.schema.createTable('sources', (table) => {
     table.increments();
+    table.string('query').notNullable();
     table.string('name').notNullable();
     table.text('description').notNullable();
     table.string('url').notNullable();
