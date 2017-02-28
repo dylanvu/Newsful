@@ -1,7 +1,6 @@
 'use strict';
 
 const router = require('express').Router();
-const axios = require('axios');
 const knex = require('../../knex');
 const request = require('request');
 
@@ -27,7 +26,7 @@ const getArticles = function(url, source) {
   return promise;
 };
 
-router.get('/', (req, res) => {
+router.get('/articles', (req, res) => {
   knex('sources')
   .select('query', 'name', 'url', 'category')
   .then(sources => {
@@ -43,9 +42,8 @@ router.get('/', (req, res) => {
   .then(articles => {
     articles = articles.reduce((acc, arr) => {
       return acc.concat(arr);
-    }, []);
-
-    articles = articles.sort((a, b) => {
+    }, [])
+    .sort((a, b) => {
       return new Date(b.publishedAt) - new Date(a.publishedAt);
     });
 
@@ -56,17 +54,5 @@ router.get('/', (req, res) => {
     res.send(err);
   });
 });
-
-router.get('/sources', (req, res) => {
-  knex('sources')
-  .then(sources => {
-    res.send(sources);
-  })
-  .catch(err => {
-    res.status(500);
-    res.send(err);
-  })
-});
-
 
 module.exports = router;
