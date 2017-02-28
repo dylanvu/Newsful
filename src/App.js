@@ -17,11 +17,6 @@ class App extends Component {
   fetchArticlesTest() {
     axios.get('api')
     .then(res => {
-      // var flattened = res.data.reduce(function(a,  b) {
-      //   return a.concat(b);
-      // }, []);
-      // console.log(flattened);
-      // this.setState({list: flattened});
       this.setState({list: res.data});
     })
     .catch(err => {
@@ -48,7 +43,7 @@ class App extends Component {
               <p>{ele.author}</p>
               <p>{ele.description}</p>
               <p>{ele.publishedAt}</p>
-              <p>{ele.sourceName}</p>
+              <p><a href={ele.sourceUrl}>{ele.sourceName}</a></p>
             </div>
           ))}
         </div>
