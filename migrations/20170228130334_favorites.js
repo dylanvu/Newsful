@@ -3,6 +3,12 @@
 exports.up = function(knex) {
   return knex.schema.createTable('favorites', (table) => {
     table.increments();
+    table.integer('user_id')
+      .notNullable()
+      .references('id')
+      .inTable('users')
+      .onDelete('CASCADE')
+      .index();
     table.string('author').notNullable();
     table.text('description').notNullable();
     table.date('publishedAt').notNullable();
