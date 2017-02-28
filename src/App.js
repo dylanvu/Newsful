@@ -43,7 +43,7 @@ class App extends Component {
               <p>{ele.author}</p>
               <p>{ele.description}</p>
               <p>{ele.publishedAt}</p>
-              <p>{ele.source}</p>
+              <p>{ele.sourceName}</p>
             </div>
           ))}
         </div>

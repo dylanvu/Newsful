@@ -5,53 +5,45 @@ const axios = require('axios');
 const knex = require('../../knex');
 const request = require('request');
 
-const getArticles = function(source) {
-  const getArticlesPromise = new Promise((resolve, reject) => {
-    request(source.articlesUrl, (err, res) => {
+const getArticles = function(url, source) {
+  const promise = new Promise((resolve, reject) => {
+    request(url, (err, res, body) => {
       if (err) {
         return reject(err);
       }
-      console.log(res.body);
-      resolve(res.body);
+
+      const parsedBody = JSON.parse(body);
+      const articlesArr = parsedBody.articles.map(article => {
+        article.sourceName = source.name;
+        article.sourceUrl = source.url;
+        article.sourceCategory = source.category;
+        return article;
+      });
+
+      resolve(articlesArr);
     });
   });
-}
+
+  return promise;
+};
 
 router.get('/', (req, res) => {
   knex('sources')
   .select('query', 'name', 'url', 'category')
-  .then(data => {
-    const sources = data.map(ele => {
-      const source = {
-        articlesUrl:
-          `https://newsapi.org/v1/articles?source=${ele.query}&apiKey=226be9019bc144dfb7d0ebbfb4c8b0cc`
-        ,
-        name: ele.name,
-        sourceUrl: ele.url,
-        category: ele.category
-      }
-      return source;
-    });
-    return sources;
-  })
   .then(sources => {
-    const result = [];
-    for (const source of sources) {
-      result.push(getArticles(source));
-    }
-    console.log(result);
-    return Promise.all(result);
-  })
-  .then(response => {
-    const result = []
-    for (const sourceObj of response) {
+    const toResolve = sources.map(source => {
+      return getArticles(
+        `https://newsapi.org/v1/articles?source=${source.query}&apiKey=226be9019bc144dfb7d0ebbfb4c8b0cc`,
+        source
+      );
+    });
 
-      for (const article of sourceObj.data.articles) {
-        article.source = sourceObj.data.source;
-        result.push(article)
-      }
-    }
-    res.send(result);
+    return Promise.all(toResolve);
+  })
+  .then(articles => {
+    // TODO: Ask someone what the fuck is going on
+    console.log(articles);
+    res.send(articles);
   })
   .catch(err => {
     console.log(err);
