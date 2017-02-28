@@ -27,7 +27,6 @@ router.post('/users', (req, res, next) => {
     }, '*');
   })
   .then((user) => {
-    console.log(user);
     delete user[0].hashed_password;
     res.send(user[0]);
   })
