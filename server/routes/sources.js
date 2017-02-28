@@ -1,7 +1,7 @@
 'use strict';
 
-const router = require('express').Router();
 const knex = require('../../knex');
+const router = require('express').Router();
 
 router.get('/sources', (req, res) => {
   knex('sources')

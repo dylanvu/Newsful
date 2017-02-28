@@ -1,8 +1,8 @@
 'use strict';
 
-const router = require('express').Router();
 const knex = require('../../knex');
 const request = require('request');
+const router = require('express').Router();
 
 const getArticles = function(url, source) {
   const promise = new Promise((resolve, reject) => {
