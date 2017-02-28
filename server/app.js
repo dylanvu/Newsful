@@ -21,6 +21,7 @@ app.use(morgan('dev'));
 
 app.use(require('./routes/articles'));
 app.use(require('./routes/sources'));
+app.use(require('./routes/token'));
 app.use(require('./routes/users'));
 
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
