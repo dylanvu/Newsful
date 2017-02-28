@@ -10,7 +10,7 @@ exports.up = function(knex) {
       .onDelete('CASCADE')
       .index();
     table.string('author').notNullable();
-    table.text('description').notNullable();
+    table.string('description').notNullable();
     table.date('publishedAt').notNullable();
     table.string('sourceCategory').notNullable();
     table.string('sourceName').notNullable();
