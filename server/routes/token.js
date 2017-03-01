@@ -16,7 +16,7 @@ router.post('/token', (req, res, next) => {
   .first()
   .then((row) => {
     if (!row) {
-      throw boom.create(400, 'Bad email or password');
+      throw boom.create(400, 'Email is not registered');
     }
 
     user = camelizeKeys(row);

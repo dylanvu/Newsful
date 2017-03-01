@@ -1,5 +1,7 @@
 'use strict';
 
+const boom = require('boom');
+const jwt = require('jsonwebtoken');
 const knex = require('../../knex');
 const request = require('request');
 const router = require('express').Router();
@@ -39,16 +41,16 @@ const authorize = function(req, res, next) {
 };
 
 router.get('/articles', authorize, (req, res) => {
-  knex('associative')
+  knex('user_source')
   .select('sources.query', 'sources.name', 'sources.url', 'sources.category')
-  .innerJoin('sources','associative.source_id','sources.id')
-  .where('associative.user_id', req.claim.userId)
+  .innerJoin('sources','user_source.source_id','sources.id')
+  .where('user_source.user_id', req.claim.userId)
   .then(sources => {
+    console.log(sources);
     const toResolve = sources.map(source => {
-      return getArticles(
-        `https://newsapi.org/v1/articles?source=${source.query}&apiKey=226be9019bc144dfb7d0ebbfb4c8b0cc`,
-        source
-      );
+      const url = `https://newsapi.org/v1/articles?source=${source.query}&apiKey=${process.env.API_KEY}`
+
+      return getArticles(url ,source);
     });
 
     return Promise.all(toResolve);
