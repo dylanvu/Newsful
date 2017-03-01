@@ -26,9 +26,23 @@ const getArticles = function(url, source) {
   return promise;
 };
 
-router.get('/articles', (req, res) => {
-  knex('sources')
-  .select('query', 'name', 'url', 'category')
+const authorize = function(req, res, next) {
+  jwt.verify(req.cookies.token, process.env.JWT_KEY, (err, payload) => {
+    if (err) {
+      return next(boom.create(401, 'Unauthorized'));
+    }
+
+    req.claim = payload;
+
+    next();
+  });
+};
+
+router.get('/articles', authorize, (req, res) => {
+  knex('associative')
+  .select('sources.query', 'sources.name', 'sources.url', 'sources.category')
+  .innerJoin('sources','associative.source_id','sources.id')
+  .where('associative.user_id', req.claim.userId)
   .then(sources => {
     const toResolve = sources.map(source => {
       return getArticles(
