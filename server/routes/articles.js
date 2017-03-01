@@ -41,10 +41,10 @@ const authorize = function(req, res, next) {
 };
 
 router.get('/articles', authorize, (req, res) => {
-  knex('user_source')
+  knex('subscriptions')
   .select('sources.query', 'sources.name', 'sources.url', 'sources.category')
-  .innerJoin('sources','user_source.source_id','sources.id')
-  .where('user_source.user_id', req.claim.userId)
+  .innerJoin('sources','subscriptions.source_id','sources.id')
+  .where('subscriptions.user_id', req.claim.userId)
   .then(sources => {
     console.log(sources);
     const toResolve = sources.map(source => {
