@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports.seed = ((knex) => {
+exports.seed = function(knex) {
   return knex('users').del()
     .then(() => {
       return knex('users').insert([{
@@ -18,7 +18,8 @@ module.exports.seed = ((knex) => {
       }]);
     })
     .then(() => {
-      return knex.raw("SELECT setval('users_id_seq', (SELECT MAX(id) FROM users));"
+      return knex.raw(
+        "SELECT setval('users_id_seq', (SELECT MAX(id) FROM users));"
       );
     });
-});
+};
