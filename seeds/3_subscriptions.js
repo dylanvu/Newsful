@@ -1,9 +1,9 @@
 'use strict';
 
 exports.seed = function(knex) {
-  return knex('user_source').del()
+  return knex('subscriptions').del()
     .then(() => {
-      return knex('user_source').insert([{
+      return knex('subscriptions').insert([{
         id: 1,
         user_id: 1,
         source_id: 1
@@ -19,7 +19,7 @@ exports.seed = function(knex) {
     })
     .then(() => {
       return knex.raw(
-        "SELECT setval('user_source_id_seq', (SELECT MAX(id) FROM user_source));"
+        "SELECT setval('subscriptions_id_seq', (SELECT MAX(id) FROM subscriptions));"
       );
     });
 };

@@ -1,7 +1,7 @@
 'use strict';
 
 exports.up = function(knex) {
-  return knex.schema.createTable('user_source', (table) => {
+  return knex.schema.createTable('subscriptions', (table) => {
     table.increments();
     table.integer('user_id')
       .notNullable()
@@ -19,5 +19,5 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTable('user_source');
+  return knex.schema.dropTable('subscriptions');
 };
