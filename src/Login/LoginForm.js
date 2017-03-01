@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class Login extends Component {
+class LoginForm extends Component {
   constructor(props) {
     super(props);
 
@@ -36,25 +36,30 @@ class Login extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          name="email"
-          onChange={this.handleChange}
-          placeholder="Email"
-          type="email"
-          value={this.state.username}
-        />
-        <input
-          name="password"
-          onChange={this.handleChange}
-          placeholder="Password"
-          type="password"
-          value={this.state.password}
-        />
-        <input type="submit" value="Log In" />
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <input
+            name="email"
+            onChange={this.handleChange}
+            placeholder="Email"
+            type="email"
+            value={this.state.username}
+          />
+          <input
+            name="password"
+            onChange={this.handleChange}
+            placeholder="Password"
+            type="password"
+            value={this.state.password}
+          />
+          <input type="submit" value="Log In" />
+        </form>
+        <a>
+
+        </a>
+      </div>
     );
   }
 }
 
-export default Login;
+export default LoginForm;
