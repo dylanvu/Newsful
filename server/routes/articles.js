@@ -40,13 +40,12 @@ const authorize = function(req, res, next) {
   });
 };
 
-router.get('/articles', authorize, (req, res) => {
+router.get('/articles', authorize, (req, res, next) => {
   knex('subscriptions')
   .select('sources.query', 'sources.name', 'sources.url', 'sources.category')
   .innerJoin('sources','subscriptions.source_id','sources.id')
   .where('subscriptions.user_id', req.claim.userId)
   .then(sources => {
-    console.log(sources);
     const toResolve = sources.map(source => {
       const url = `https://newsapi.org/v1/articles?source=${source.query}&apiKey=${process.env.API_KEY}`
 
@@ -66,8 +65,7 @@ router.get('/articles', authorize, (req, res) => {
     res.send(articles);
   })
   .catch(err => {
-    res.status(500);
-    res.send(err);
+    next(err);
   });
 });
 

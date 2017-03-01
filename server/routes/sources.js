@@ -9,8 +9,7 @@ router.get('/sources', (req, res) => {
     res.send(sources);
   })
   .catch(err => {
-    res.status(500);
-    res.send(err);
+    next(err);
   })
 });
 

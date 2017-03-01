@@ -30,4 +30,16 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
 });
 
+app.use((err, _req, res, _next) => {
+  if (err.status) {
+    return res
+      .status(err.status)
+      .set('Content-Type', 'text/plain')
+      .send(err.message);
+  }
+
+  console.error(err.stack);
+  res.sendStatus(500);
+});
+
 module.exports = app;
