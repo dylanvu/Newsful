@@ -28,6 +28,7 @@ class LoginForm extends Component {
       password: this.state.password
     })
     .then((res) => {
+      this.props.handleLogin(true);
       browserHistory.push('/feed');
     })
     .catch((err) => {

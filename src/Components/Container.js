@@ -13,15 +13,18 @@ class Container extends Component {
     }
 
     this.handleLogout = this.handleLogout.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
   }
   componentDidMount() {
     this.verifySession();
+  }
+  handleLogin(authenticated){
+    this.setState({authenticated});
   }
 
   handleLogout(){
     axios.delete('token')
     .then((res) => {
-      browserHistory.push('/');
       this.verifySession();
     })
     .catch((err) => {
@@ -51,9 +54,9 @@ class Container extends Component {
         <Nav
           authenticated={this.state.authenticated}
           onLogout={this.handleLogout}
-          verify={this.verifySession}
         />
-        {this.props.children}
+        {this.props.children ?
+          React.cloneElement(this.props.children,{handleLogin: this.handleLogin}): null }
       </div>
     );
   }
