@@ -7,14 +7,21 @@ function Articles(props) {
       { articles.map(article => (
         <div key={article.title}>
           <div className="Article">
-            {/* <img src={article.urlToImage} alt={article.title}/> */}
-            <p><a href={article.url}>{article.title}</a></p>
-            <p>{article.author}</p>
-            <p>{article.description}</p>
-            <p>{article.publishedAt}</p>
-            <p><a href={article.sourceUrl}>{article.sourceName}</a></p>
+            <div className="Source">
+              <p><a href={article.sourceUrl}>{article.sourceName}</a></p>
+              <p>{article.author}</p>
+            </div>
+            <p className="ArticleDate">
+              {article.publishedAt}
+            </p>
+            <img
+              className="ArticleImg" src={article.urlToImage} alt={article.title}/>
+            <p className="ArticleTitle"><a href={article.url}>{article.title}</a></p>
+            <p className="ArticleDesc">
+              {article.description}
+            </p>
           </div>
-          <hr></hr>
+          {/* <hr></hr> */}
         </div>
       ))}
     </div>

@@ -5,7 +5,7 @@ class Nav extends Component {
   render() {
     console.log(this.props);
     return (
-      <nav>
+      <nav className="Nav">
         <h1>Newsful</h1>
         {this.props.authenticated
           ? <button

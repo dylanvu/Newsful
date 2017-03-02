@@ -51,6 +51,7 @@ class Container extends Component {
         <Nav
           authenticated={this.state.authenticated}
           onLogout={this.handleLogout}
+          verify={this.verifySession}
         />
         {this.props.children}
       </div>
