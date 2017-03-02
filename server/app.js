@@ -34,6 +34,12 @@ app.use((err, _req, res, _next) => {
   if (err.status) {
     return res
       .status(err.status)
+      .send(err);
+  }
+
+  if (err.output && err.output.statusCode) {
+    return res
+      .status(err.output.statusCode)
       .set('Content-Type', 'text/plain')
       .send(err.message);
   }
