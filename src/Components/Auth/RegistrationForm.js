@@ -26,7 +26,7 @@ class RegistrationForm extends Component {
     event.preventDefault();
     axios.post('users', this.state)
     .then((res) => {
-      browserHistory.push('/login');
+      browserHistory.push('/feed');
     })
     .catch((err) => {
       console.log(err);
