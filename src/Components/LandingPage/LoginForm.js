@@ -28,7 +28,7 @@ class LoginForm extends Component {
       password: this.state.password
     })
     .then((res) => {
-      browserHistory.push('/');
+      browserHistory.push('/feed');
     })
     .catch((err) => {
       console.log(err);
