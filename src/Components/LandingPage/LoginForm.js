@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link, browserHistory } from 'react-router';
 
 class LoginForm extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class LoginForm extends Component {
       password: this.state.password
     })
     .then((res) => {
-      console.log(res);
+      browserHistory.push('/');
     })
     .catch((err) => {
       console.log(err);
@@ -54,9 +55,9 @@ class LoginForm extends Component {
           />
           <input type="submit" value="Log In" />
         </form>
-        <a>
-
-        </a>
+        <Link to="/register">
+          Register
+        </Link>
       </div>
     );
   }

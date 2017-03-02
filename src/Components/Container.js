@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
-import LandingPage from './LandingPage/LandingPage';
+import { Router, Route, browserHistory } from 'react-router';
+import LoginForm from './LandingPage/LoginForm';
+import RegistrationForm from './LandingPage/RegistrationForm';
 import Dashboard from './Main/Dashboard';
 import axios from 'axios';
 
 class Container extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isLoggedIn: false
-    };
-  }
-
   componentDidMount() {
     this.verifySession();
   }
@@ -20,7 +14,10 @@ class Container extends Component {
     axios.get('token')
     .then((res) => {
       if (res.data) {
-        this.setState({isLoggedIn: true});
+        browserHistory.push('/');
+      }
+      else {
+        browserHistory.push('/login');
       }
     })
     .catch((err) => {
@@ -29,16 +26,13 @@ class Container extends Component {
   }
 
   render() {
-    if (this.state.isLoggedIn) {
-      return (
-        <Dashboard />
-      );
-    }
-    else {
-      return (
-        <LandingPage />
-      );
-    }
+    return (
+      <Router history={browserHistory}>
+        <Route path='/' component={Dashboard} />
+        <Route path='login' component={LoginForm} />
+        <Route path='register' component={RegistrationForm} />
+      </Router>
+    );
   }
 }
 

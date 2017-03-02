@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link, browserHistory } from 'react-router';
 
 class RegistrationForm extends Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class RegistrationForm extends Component {
     event.preventDefault();
     axios.post('users', this.state)
     .then((res) => {
-      console.log(res);
+      browserHistory.push('/login');
     })
     .catch((err) => {
       console.log(err);
@@ -62,6 +63,9 @@ class RegistrationForm extends Component {
             value="Register"
           />
         </form>
+        <Link to="/login">
+          Log in
+        </Link>
       </div>
     )
   }
