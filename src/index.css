@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background-color: #FAFAFA;
+  background-color: #C2C2C2;
 }
 h1{
   margin-top: 0px;
@@ -27,7 +27,7 @@ form{
   border-radius: 4px;
 }
 .ArticleImg {
-  height: 230px;
+  max-width: 100%;
 }
 .ArticleTitle {
   margin-top: 10px;

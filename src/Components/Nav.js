@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link, browserHistory } from 'react-router';
 
 class Nav extends Component {
   render() {
@@ -7,8 +8,12 @@ class Nav extends Component {
         <h1>Newsful</h1>
         {this.props.authenticated
           ? <button onClick={this.props.onLogout}>
-            Log Out
-          </button>
+              Log Out
+            </button>
+          : null
+        }
+        {this.props.authenticated
+          ? <button><Link to="./subscriptions"></Link></button>
           : null
         }
       </nav>

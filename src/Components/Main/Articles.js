@@ -21,7 +21,6 @@ function Articles(props) {
               {article.description}
             </p>
           </div>
-          {/* <hr></hr> */}
         </div>
       ))}
     </div>
