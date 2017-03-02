@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import LandingPage from '../LandingPage/LandingPage';
-import Articles from '../Articles/Articles';
+import LandingPage from './LandingPage/LandingPage';
+import Dashboard from './Main/Dashboard';
 import axios from 'axios';
 
-class Session extends Component {
+class Container extends Component {
   constructor(props) {
     super(props);
 
@@ -31,7 +31,7 @@ class Session extends Component {
   render() {
     if (this.state.isLoggedIn) {
       return (
-        <Articles />
+        <Dashboard />
       );
     }
     else {
@@ -42,4 +42,4 @@ class Session extends Component {
   }
 }
 
-export default Session;
+export default Container;

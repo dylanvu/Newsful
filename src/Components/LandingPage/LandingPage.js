@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import LoginForm from '../Login/LoginForm';
-import RegistrationForm from '../Registration/RegistrationForm';
+import LoginForm from './LoginForm';
+import RegistrationForm from './RegistrationForm';
 
 class LandingPage extends Component {
   constructor(props) {
