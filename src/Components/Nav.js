@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { link, browserHistory} from 'react-router';
 
-function Nav(props) {
-  return (
-    <nav>
-      <h1>Newsful</h1>
-    </nav>
-  );
+class Nav extends Component {
+  render() {
+    console.log(this.props);
+    return (
+      <nav>
+        <h1>Newsful</h1>
+        {this.props.authenticated
+          ? <button
+            onClick={this.props.onLogout}
+            >Log Out</button>
+          : <div>not logged in</div>
+        }
+      </nav>
+    );
+  }
 }
 
 export default Nav;

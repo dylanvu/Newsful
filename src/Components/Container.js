@@ -5,13 +5,34 @@ import axios from 'axios';
 import { browserHistory } from 'react-router';
 
 class Container extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      authenticated: false
+    }
+
+    this.handleLogout = this.handleLogout.bind(this);
+  }
   componentDidMount() {
     this.verifySession();
+  }
+
+  handleLogout(){
+    axios.delete('token')
+    .then((res) => {
+      browserHistory.push('/');
+      this.verifySession();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
 
   verifySession() {
     axios.get('token')
     .then((res) => {
+      this.setState({ authenticated: res.data });
       if (res.data) {
         browserHistory.push('/feed');
       }
@@ -27,7 +48,10 @@ class Container extends Component {
   render() {
     return (
       <div>
-        <Nav />
+        <Nav
+          authenticated={this.state.authenticated}
+          onLogout={this.handleLogout}
+        />
         {this.props.children}
       </div>
     );
