@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Router, Route, browserHistory } from 'react-router';
-import LoginForm from './LandingPage/LoginForm';
-import RegistrationForm from './LandingPage/RegistrationForm';
-import Dashboard from './Main/Dashboard';
 import Nav from './Nav';
+
 import axios from 'axios';
+import { browserHistory } from 'react-router';
 
 class Container extends Component {
   componentDidMount() {
@@ -28,13 +26,10 @@ class Container extends Component {
 
   render() {
     return (
-      <Router history={browserHistory}>
-        <Route path='/' component={Nav}>
-          <Route path='/feed' component={Dashboard} />
-          <Route path='/login' component={LoginForm} />
-          <Route path='/register' component={RegistrationForm} />
-        </Route>
-      </Router>
+      <div>
+        <Nav />
+        {this.props.children}
+      </div>
     );
   }
 }

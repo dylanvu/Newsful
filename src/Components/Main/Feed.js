@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Articles from './Articles';
 import axios from 'axios';
 
-class Dashboard extends Component {
+class Feed extends Component {
   constructor(props) {
     super(props);
 
@@ -31,4 +31,4 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+export default Feed;
