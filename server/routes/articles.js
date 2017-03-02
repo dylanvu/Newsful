@@ -1,7 +1,7 @@
 'use strict';
 
+const authorize = require('../helpers/authorize');
 const boom = require('boom');
-const jwt = require('jsonwebtoken');
 const knex = require('../../knex');
 const request = require('request');
 const router = require('express').Router();
@@ -28,18 +28,6 @@ const getArticles = function(url, source) {
   return promise;
 };
 
-const authorize = function(req, res, next) {
-  jwt.verify(req.cookies.token, process.env.JWT_KEY, (err, payload) => {
-    if (err) {
-      return next(boom.create(401, 'Unauthorized'));
-    }
-
-    req.claim = payload;
-
-    next();
-  });
-};
-
 router.get('/allArticles', (req, res, next) => {
   knex('sources')
   .select('sources.query', 'sources.name', 'sources.url', 'sources.category')
@@ -60,7 +48,7 @@ router.get('/allArticles', (req, res, next) => {
       return new Date(b.publishedAt) - new Date(a.publishedAt);
     });
 
-    res.send(articles);
+    res.send(articles.length.toString());
   })
   .catch(err => {
     next(err);
