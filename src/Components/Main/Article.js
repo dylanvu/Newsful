@@ -3,8 +3,7 @@ import React from 'react';
 function Article(props) {
   const { article } = props;
   return (
-    <div className="Article"
-      key={article.title}>
+    <div className="Article">
       {/* <img src={article.urlToImage} alt={article.title}/> */}
       <p><a href={article.url}>{article.title}</a></p>
       <p>{article.author}</p>

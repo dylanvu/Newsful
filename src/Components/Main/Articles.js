@@ -5,8 +5,8 @@ function Articles(props) {
   const { articles } = props;
   return (
     <div className="Articles">
-      { articles.map(ele => (
-        <Article article={ele}/>
+      { articles.map(article => (
+        <Article article={article} key={article.title}/>
       ))}
     </div>
   );
