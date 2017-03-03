@@ -85,24 +85,11 @@ router.get('/articles', authorize, (req, res, next) => {
 });
 
 router.get('/bookmarks', authorize, (req, res, next) => {
-  knex('articles')
-  .select(
-    'articles.id',
-    'articles.author',
-    'articles.description',
-    'articles.publishedAt',
-    'articles.sourceCategory',
-    'articles.sourceName',
-    'articles.sourceUrl',
-    'articles.title',
-    'articles.url',
-    'articles.urlToImage'
-  )
-  .innerJoin('bookmarks', 'articles.id', 'bookmarks.article_id')
+  knex('bookmarks')
   .where('bookmarks.user_id', req.claim.userId)
-  .then((articles) => {
-    console.log(articles);
-    res.send(articles);
+  .then((bookmarks) => {
+    console.log(bookmarks);
+    res.send(bookmarks);
   })
   .catch((err) => {
     console.log(err);
@@ -111,29 +98,33 @@ router.get('/bookmarks', authorize, (req, res, next) => {
 
 router.post('/bookmarks', authorize, (req, res, next) => {
   knex('bookmarks')
+  .where('bookmarks.title', req.body.title)
   .where('bookmarks.user_id', req.claim.userId)
-  .andWhere('bookmarks.article_id', req.body.id)
-  .then((rows) => {
-    if (rows) => {
-      knex('bookmarks')
+  .then((bookmark) => {
+    if (bookmark.length) {
+      return knex('bookmarks')
       .del('*')
       .where('bookmarks.user_id', req.claim.userId)
-      .andWhere('bookmarks.article_id', req.body)
+      .where('bookmarks.title', req.body.title)
       .then(() => {
-        return true;
-      });
+        return 'deleted';
+      })
     }
     else {
+      req.body.user_id = req.claim.userId;
       return knex('bookmarks')
-      .insert({
-        user_id: req.claim.userId,
-        article_id: req.body.id
-      }, '*');
+      .insert(req.body, '*')
+      .then(() => {
+        return 'added';
+      })
     }
   })
-  .then((row) => {
-
+  .then((verb) => {
+    res.send(verb);
   })
-})
+  .catch((err) => {
+    next(err);
+  });
+});
 
 module.exports = router;
