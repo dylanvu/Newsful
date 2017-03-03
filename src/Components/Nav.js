@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { Navbar, Button } from 'react-bootstrap';
 
 class Nav extends Component {
   render() {
     return (
-      <nav className="Nav">
+      <Navbar>
         <h1>Newsful</h1>
         {this.props.authenticated
           ? <div>
-              <button onClick={this.props.onLogout}>
+              <Button bsStyle="link" onClick={this.props.onLogout}>
                 Log Out
-              </button>
+              </Button>
               <Link to="/bookmarks">
                 Bookmarks
               </Link>
@@ -20,7 +21,7 @@ class Nav extends Component {
             </div>
           : null
         }
-      </nav>
+      </Navbar>
     );
   }
 }

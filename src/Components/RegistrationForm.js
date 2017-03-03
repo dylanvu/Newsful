@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
+import { Button, Form, FormGroup, FormControl } from 'react-bootstrap';
 
 class RegistrationForm extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class RegistrationForm extends Component {
     event.preventDefault();
     axios.post('users', this.state)
     .then((res) => {
-      browserHistory.push('/feed');
+      browserHistory.push('/subscriptions');
     })
     .catch((err) => {
       console.log(err);
@@ -35,36 +36,33 @@ class RegistrationForm extends Component {
 
   render() {
     return (
-      <div className="Form">
+      <div>
         <form onSubmit={this.handleSubmit}>
-          <input
+          <FormControl
             name="email"
             onChange={this.handleChange}
             placeholder="Email"
             type="email"
             value={this.state.email}
           />
-          <input
+          <FormControl
             name="password"
             onChange={this.handleChange}
             placeholder="Password"
             type="password"
             value={this.state.password}
           />
-          <input
+          <FormControl
             name="verifyPassword"
             onChange={this.handleChange}
             placeholder="Confirm Password"
             type="password"
             value={this.state.verifyPassword}
           />
-          <input
-            type="submit"
-            value="Register"
-          />
+          <Button type="submit">Register</Button>
         </form>
         <Link to="/login">
-          Log in
+          Have an account?
         </Link>
       </div>
     )

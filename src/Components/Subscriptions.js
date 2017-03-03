@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { browserHistory } from 'react-router';
+import { Button, Checkbox } from 'react-bootstrap';
 
 class Subscriptions extends Component {
   constructor(props) {
@@ -69,20 +70,18 @@ class Subscriptions extends Component {
       <div>
         <h2>Subscriptions</h2>
         <form onSubmit={this.handleSubmit}>
-          <input
-            type="submit"
-            value="Update"
-          />
+          <Button type="submit">Update Subscriptions</Button>
           { sources.map(source => (
             <div key={source.id}>
-              <input
+              <Checkbox
                 value={source.id}
                 name="subscribed"
                 type="checkbox"
                 checked={this.state.subscriptions.includes(source.id)}
                 onChange={this.handleInputChange}
-              />
-              <label>{source.name}</label>
+              >
+                {source.name}
+              </Checkbox>
             </div>
           ))}
         </form>

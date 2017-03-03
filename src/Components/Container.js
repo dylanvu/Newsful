@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Nav from './Nav';
-
+import { Grid, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 
@@ -50,7 +50,7 @@ class Container extends Component {
   handleBookmark(article) {
     axios.post('bookmarks', article)
     .then((res) => {
-      console.log(res.data)
+      this.setState({bookmarks: res.data})
     })
     .catch((err) => {
       console.log(err);
@@ -75,23 +75,29 @@ class Container extends Component {
 
   render() {
     return (
-      <div>
-        <Nav
-          authenticated={this.state.authenticated}
-          onLogout={this.handleLogout}
-        />
-        { this.props.children
-          ? React.cloneElement(
-              this.props.children,
-              {
-                handleLogin: this.handleLogin,
-                bookmarks: this.state.bookmarks,
-                onClick: this.handleBookmark,
-              }
-            )
-          : null
-        }
-      </div>
+      <Grid>
+        <Row>
+          <Nav
+            authenticated={this.state.authenticated}
+            onLogout={this.handleLogout}
+          />
+        </Row>
+        <Row>
+          <Col xs={12}>
+            { this.props.children
+              ? React.cloneElement(
+                  this.props.children,
+                  {
+                    handleLogin: this.handleLogin,
+                    bookmarks: this.state.bookmarks,
+                    onClick: this.handleBookmark,
+                  }
+                )
+              : null
+            }
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }

@@ -106,21 +106,19 @@ router.post('/bookmarks', authorize, (req, res, next) => {
       .del('*')
       .where('bookmarks.user_id', req.claim.userId)
       .where('bookmarks.title', req.body.title)
-      .then(() => {
-        return 'deleted';
-      })
     }
     else {
       req.body.user_id = req.claim.userId;
       return knex('bookmarks')
       .insert(req.body, '*')
-      .then(() => {
-        return 'added';
-      })
     }
   })
-  .then((verb) => {
-    res.send(verb);
+  .then(() => {
+    knex('bookmarks')
+    .where('bookmarks.user_id', req.claim.userId)
+    .then((bookmarks) => {
+      res.send(bookmarks);
+    })
   })
   .catch((err) => {
     next(err);
