@@ -11,6 +11,9 @@ class Nav extends Component {
               <button onClick={this.props.onLogout}>
                 Log Out
               </button>
+              <Link to="/bookmarks">
+                Bookmarks
+              </Link>
               <Link to="/subscriptions">
                 Subscriptions
               </Link>
