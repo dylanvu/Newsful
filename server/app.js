@@ -20,7 +20,6 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 
 app.use(require('./routes/articles'));
-app.use(require('./routes/bookmarks'));
 app.use(require('./routes/sources'));
 app.use(require('./routes/token'));
 app.use(require('./routes/users'));

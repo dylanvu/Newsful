@@ -55,7 +55,7 @@ router.get('/allArticles', (req, res, next) => {
   });
 });
 
-router.get('/bookmarks'), authorize, (req, res, next) => {
+router.get('/bookmarks', authorize, (req, res, next) => {
   knex('articles')
   .select(
     'articles.id',
@@ -69,7 +69,7 @@ router.get('/bookmarks'), authorize, (req, res, next) => {
     'articles.url',
     'articles.urlToImage'
   )
-  .innerJoin('bookmarks', 'articles.id', 'bookmark.article_id')
+  .innerJoin('bookmarks', 'articles.id', 'bookmarks.article_id')
   .where('bookmarks.user_id', req.claim.userId)
   .then((articles) => {
     console.log(articles);

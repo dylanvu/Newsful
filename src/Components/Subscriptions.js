@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link, browserHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 
 class Subscriptions extends Component {
   constructor(props) {
@@ -33,7 +33,6 @@ class Subscriptions extends Component {
   fetchSubscriptions() {
     axios.get('subscriptions')
     .then((res) => {
-      console.log(res)
       this.setState({subscriptions: res.data});
     })
     .catch((err) => {
@@ -43,7 +42,7 @@ class Subscriptions extends Component {
 
   handleInputChange(event) {
     const subscriptions = this.state.subscriptions;
-    const sourceId = parseInt(event.target.value);
+    const sourceId = parseInt(event.target.value, 10);
     if (event.target.checked) {
       subscriptions.push(sourceId)
     } else {
