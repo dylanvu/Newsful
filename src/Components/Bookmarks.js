@@ -16,6 +16,7 @@ class Bookmarks extends Component {
   fetchBookmarks() {
     axios.get('bookmarks')
     .then((res) => {
+      console.log(res);
       this.setState({bookmarks: res.data});
     })
     .catch((err) => {
