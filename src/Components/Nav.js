@@ -12,7 +12,7 @@ class Nav extends Component {
                 Log Out
               </button>
               <Link to="/subscriptions">
-                Subsriptions
+                Subscriptions
               </Link>
             </div>
           : null

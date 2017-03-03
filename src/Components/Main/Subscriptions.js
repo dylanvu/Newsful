@@ -12,17 +12,29 @@ class Subscriptions extends Component {
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
     this.fetchSources();
-    // this.fetchSubscriptions();
+    this.fetchSubscriptions();
   }
 
   fetchSources() {
     axios.get('sources')
     .then((res) => {
       this.setState({sources: res.data});
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
+  fetchSubscriptions() {
+    axios.get('subscriptions')
+    .then((res) => {
+      console.log(res)
+      this.setState({subscriptions: res.data});
     })
     .catch((err) => {
       console.log(err);
@@ -42,7 +54,6 @@ class Subscriptions extends Component {
   }
 
   handleSubmit() {
-    console.log(this.state.subscriptions);
     event.preventDefault();
     axios.post('subscriptions', this.state.subscriptions)
     .then((res) => {
@@ -52,15 +63,7 @@ class Subscriptions extends Component {
       console.log(err);
     })
   }
-  // fetchSubscriptions() {
-  //   axios.get('subscriptions')
-  //   .then((res) => {
-  //     this.setState({subscriptions: res.data});
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
-  // }
+
 
   render() {
     const { sources } = this.state;
@@ -79,7 +82,7 @@ class Subscriptions extends Component {
                 value={source.id}
                 name="subscribed"
                 type="checkbox"
-                // checked={}
+                checked={this.state.subscriptions.includes(source.id)}
                 onChange={this.handleInputChange}
               />
               <label>{source.name}</label>
@@ -90,5 +93,5 @@ class Subscriptions extends Component {
     );
   }
 }
-//this.state.subscriptions.includes(source.id) ? true : false
+
 export default Subscriptions;

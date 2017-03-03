@@ -18,8 +18,11 @@ router.get('/subscriptions', authorize, (req, res, next) => {
   knex('subscriptions')
   .select('source_id')
   .where('user_id', req.claim.userId)
-  .then((ids) => {
-    res.send(ids);
+  .then((sources) => {
+    const sourceIds = sources.map(source => {
+      return source.source_id;
+    });
+    res.send(sourceIds);
   })
   .catch((err) => {
     next(err);
@@ -27,9 +30,7 @@ router.get('/subscriptions', authorize, (req, res, next) => {
 })
 
 router.post('/subscriptions', authorize, (req, res, next) => {
-  console.log(req.body);
-  const parsed = JSON.parse(req.body.sources);
-  const subscriptions = parsed.map(source => {
+  const subscriptions = req.body.map(source => {
     return { user_id: req.claim.userId, source_id: source };
   });
 

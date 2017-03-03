@@ -55,8 +55,11 @@ class Container extends Component {
           authenticated={this.state.authenticated}
           onLogout={this.handleLogout}
         />
-        {this.props.children ?
-          React.cloneElement(this.props.children,{handleLogin: this.handleLogin}): null }
+        { this.props.children
+          ? React.cloneElement(
+            this.props.children, {handleLogin: this.handleLogin}
+          )
+          : null }
       </div>
     );
   }
