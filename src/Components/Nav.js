@@ -8,7 +8,7 @@ class NavContainer extends Component {
       <Navbar collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to="/">Newsful</Link>
+            <Link to="/feed">Newsful</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>

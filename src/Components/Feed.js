@@ -26,7 +26,10 @@ class Feed extends Component {
   render() {
     const { articles } = this.state;
     return (
-      <Articles articles={articles} onClick={this.props.onClick}/>
+      <div>
+        <h2>News Feed</h2>
+        <Articles articles={articles} onClick={this.props.onClick}/>
+      </div>
     );
   }
 }
