@@ -28,7 +28,10 @@ router.post('/users', (req, res, next) => {
     }, '*');
   })
   .then((user) => {
-    const claim = { userId: user[0].id };
+    const claim = {
+      userId: user[0].id,
+      email: user[0].email
+    };
     const token = jwt.sign(claim, process.env.JWT_KEY, {
       expiresIn: '365 days'
     });

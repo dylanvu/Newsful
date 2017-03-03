@@ -24,7 +24,10 @@ router.post('/token', (req, res, next) => {
     return bcrypt.compare(password, user.hashedPassword);
   })
   .then(() => {
-    const claim = { userId: user.id };
+    const claim = {
+      userId: user.id,
+      email: user.email
+    };
     const token = jwt.sign(claim, process.env.JWT_KEY, {
       expiresIn: '365 days'
     });
@@ -52,7 +55,7 @@ router.get('/token', (req, res) => {
       return res.send(false);
     }
 
-    res.send(true);
+    res.send(payload.email);
   });
 });
 
