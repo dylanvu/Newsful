@@ -14,6 +14,18 @@ router.get('/sources', (req, res, next) => {
   });
 });
 
+router.get('/subscriptions', authorize, (req, res, next) => {
+  knex('subscriptions')
+  .select('source_id')
+  .where('user_id', req.claim.userId)
+  .then((ids) => {
+    res.send(ids);
+  })
+  .catch((err) => {
+    next(err);
+  });
+})
+
 router.post('/subscriptions', authorize, (req, res, next) => {
   console.log(req.body);
   const parsed = JSON.parse(req.body.sources);
