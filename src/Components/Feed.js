@@ -26,7 +26,7 @@ class Feed extends Component {
   render() {
     const { articles } = this.state;
     return (
-      <Articles articles={articles} />
+      <Articles articles={articles} onClick={this.props.onClick}/>
     );
   }
 }

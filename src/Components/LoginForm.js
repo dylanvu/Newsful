@@ -23,10 +23,7 @@ class LoginForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    axios.post('token', {
-      email: this.state.email,
-      password: this.state.password
-    })
+    axios.post('token', this.state)
     .then((res) => {
       this.props.handleLogin(true);
       browserHistory.push('/feed');

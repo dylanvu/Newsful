@@ -2,14 +2,14 @@ import React from 'react';
 import { Button, Glyphicon } from 'react-bootstrap';
 
 function Articles(props) {
-  const { articles } = props;
+  const { articles, onClick } = props;
   return (
     <div className="Articles">
       { articles.map(article => (
         <div key={article.title}>
           <div className="Article">
             <div className="Source">
-              <Button><Glyphicon glyph="bookmark"/></Button>
+              <Button onClick={() => onClick(article)}><Glyphicon glyph="bookmark"/></Button>
               <p><a href={article.sourceUrl}>{article.sourceName}</a>, {article.author}</p>
             </div>
             <p className="ArticleDate">

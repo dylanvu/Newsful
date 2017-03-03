@@ -9,15 +9,20 @@ class Container extends Component {
     super(props)
 
     this.state = {
-      authenticated: false
+      authenticated: false,
+      bookmarks: []
     }
 
     this.handleLogout = this.handleLogout.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handleBookmark = this.handleBookmark.bind(this);
   }
+
   componentDidMount() {
     this.verifySession();
+    this.fetchBookmarks();
   }
+
   handleLogin(authenticated){
     this.setState({authenticated});
   }
@@ -32,8 +37,24 @@ class Container extends Component {
     });
   }
 
-  handleClick(event) {
+  fetchBookmarks() {
+    axios.get('bookmarks')
+    .then((res) => {
+      this.setState({bookmarks: res.data});
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
 
+  handleBookmark(article) {
+    axios.post('bookmarks', article)
+    .then((res) => {
+      console.log(res.data)
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
 
   verifySession() {
@@ -64,10 +85,12 @@ class Container extends Component {
               this.props.children,
               {
                 handleLogin: this.handleLogin,
-                handleClick: this.handleClick
+                bookmarks: this.state.bookmarks,
+                onClick: this.handleBookmark,
               }
             )
-          : null }
+          : null
+        }
       </div>
     );
   }
