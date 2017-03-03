@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Nav from './Nav';
+import NavContainer from './Nav';
 import { Grid, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import { browserHistory } from 'react-router';
@@ -10,7 +10,8 @@ class Container extends Component {
 
     this.state = {
       authenticated: false,
-      bookmarks: []
+      bookmarks: [],
+      user: ''
     }
 
     this.handleLogout = this.handleLogout.bind(this);
@@ -62,6 +63,7 @@ class Container extends Component {
     .then((res) => {
       this.setState({ authenticated: res.data });
       if (res.data) {
+        this.setState({user: res.data});
         browserHistory.push('/feed');
       }
       else {
@@ -77,9 +79,10 @@ class Container extends Component {
     return (
       <Grid>
         <Row>
-          <Nav
+          <NavContainer
             authenticated={this.state.authenticated}
             onLogout={this.handleLogout}
+            user={this.state.user}
           />
         </Row>
         <Row>
@@ -88,9 +91,9 @@ class Container extends Component {
               ? React.cloneElement(
                   this.props.children,
                   {
-                    handleLogin: this.handleLogin,
                     bookmarks: this.state.bookmarks,
-                    onClick: this.handleBookmark,
+                    handleLogin: this.handleLogin,
+                    onClick: this.handleBookmark
                   }
                 )
               : null

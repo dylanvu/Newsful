@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
-import { Button, Form, FormGroup, FormControl } from 'react-bootstrap';
+import { Button, FormControl } from 'react-bootstrap';
 
 class RegistrationForm extends Component {
   constructor(props) {
