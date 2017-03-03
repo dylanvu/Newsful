@@ -55,6 +55,19 @@ router.get('/allArticles', (req, res, next) => {
   });
 });
 
+router.get('/bookmarks'), authorize, (req, res, next) => {
+  knex('articles')
+  .select('*')
+  .innerJoin('bookmarks', 'articles.id', 'bookmark.article_id')
+  .where('bookmarks.user_id', req.claim.userId)
+  .then((articles) => {
+    console.log(articles);
+    res.send(articles);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
 
 router.get('/articles', authorize, (req, res, next) => {
   knex('subscriptions')
