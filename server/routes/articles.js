@@ -55,31 +55,6 @@ router.get('/allArticles', (req, res, next) => {
   });
 });
 
-router.get('/bookmarks', authorize, (req, res, next) => {
-  knex('articles')
-  .select(
-    'articles.id',
-    'articles.author',
-    'articles.description',
-    'articles.publishedAt',
-    'articles.sourceCategory',
-    'articles.sourceName',
-    'articles.sourceUrl',
-    'articles.title',
-    'articles.url',
-    'articles.urlToImage'
-  )
-  .innerJoin('bookmarks', 'articles.id', 'bookmarks.article_id')
-  .where('bookmarks.user_id', req.claim.userId)
-  .then((articles) => {
-    console.log(articles);
-    res.send(articles);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-});
-
 router.get('/articles', authorize, (req, res, next) => {
   knex('subscriptions')
   .select('sources.query', 'sources.name', 'sources.url', 'sources.category')
@@ -108,5 +83,57 @@ router.get('/articles', authorize, (req, res, next) => {
     next(err);
   });
 });
+
+router.get('/bookmarks', authorize, (req, res, next) => {
+  knex('articles')
+  .select(
+    'articles.id',
+    'articles.author',
+    'articles.description',
+    'articles.publishedAt',
+    'articles.sourceCategory',
+    'articles.sourceName',
+    'articles.sourceUrl',
+    'articles.title',
+    'articles.url',
+    'articles.urlToImage'
+  )
+  .innerJoin('bookmarks', 'articles.id', 'bookmarks.article_id')
+  .where('bookmarks.user_id', req.claim.userId)
+  .then((articles) => {
+    console.log(articles);
+    res.send(articles);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+});
+
+router.post('/bookmarks', authorize, (req, res, next) => {
+  knex('bookmarks')
+  .where('bookmarks.user_id', req.claim.userId)
+  .andWhere('bookmarks.article_id', req.body.id)
+  .then((rows) => {
+    if (rows) => {
+      knex('bookmarks')
+      .del('*')
+      .where('bookmarks.user_id', req.claim.userId)
+      .andWhere('bookmarks.article_id', req.body)
+      .then(() => {
+        return true;
+      });
+    }
+    else {
+      return knex('bookmarks')
+      .insert({
+        user_id: req.claim.userId,
+        article_id: req.body.id
+      }, '*');
+    }
+  })
+  .then((row) => {
+
+  })
+})
 
 module.exports = router;

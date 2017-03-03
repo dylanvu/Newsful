@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Glyphicon } from 'react-bootstrap';
 
 function Articles(props) {
   const { articles } = props;
@@ -9,9 +9,8 @@ function Articles(props) {
         <div key={article.title}>
           <div className="Article">
             <div className="Source">
-              <Button>Bookmark</Button>
-              <p><a href={article.sourceUrl}>{article.sourceName}</a></p>
-              <p>{article.author}</p>
+              <Button><Glyphicon glyph="bookmark"/></Button>
+              <p><a href={article.sourceUrl}>{article.sourceName}</a>, {article.author}</p>
             </div>
             <p className="ArticleDate">
               {article.publishedAt}

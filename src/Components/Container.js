@@ -13,7 +13,7 @@ class Container extends Component {
     }
 
     this.handleLogout = this.handleLogout.bind(this);
-    this.handleLogin = this.handleLogin.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
   componentDidMount() {
     this.verifySession();
@@ -22,7 +22,7 @@ class Container extends Component {
     this.setState({authenticated});
   }
 
-  handleLogout(){
+  handleLogout() {
     axios.delete('token')
     .then((res) => {
       this.verifySession();
@@ -30,6 +30,10 @@ class Container extends Component {
     .catch((err) => {
       console.log(err);
     });
+  }
+
+  handleClick(event) {
+
   }
 
   verifySession() {
@@ -58,7 +62,10 @@ class Container extends Component {
         { this.props.children
           ? React.cloneElement(
               this.props.children,
-              {handleLogin: this.handleLogin}
+              {
+                handleLogin: this.handleLogin,
+                handleClick: this.handleClick
+              }
             )
           : null }
       </div>

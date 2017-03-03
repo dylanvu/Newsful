@@ -1,8 +1,14 @@
 'use strict';
 
 exports.up = function(knex) {
-  return knex.schema.createTable('articles', (table) => {
+  return knex.schema.createTable('bookmarks', (table) => {
     table.increments();
+    table.integer('user_id')
+      .notNullable()
+      .references('id')
+      .inTable('users')
+      .onDelete('CASCADE')
+      .index();
     table.string('author');
     table.text('description').notNullable();
     table.string('publishedAt');
@@ -16,5 +22,5 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTable('articles');
+  return knex.schema.dropTable('bookmarks');
 };
