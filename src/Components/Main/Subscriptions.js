@@ -64,7 +64,6 @@ class Subscriptions extends Component {
     })
   }
 
-
   render() {
     const { sources } = this.state;
     return (
@@ -77,7 +76,6 @@ class Subscriptions extends Component {
           />
           { sources.map(source => (
             <div key={source.id}>
-              {/* <div>{source.name}</div> */}
               <input
                 value={source.id}
                 name="subscribed"
