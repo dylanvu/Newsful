@@ -1,5 +1,6 @@
 'use strict';
 
+const boom = require('boom');
 const jwt = require('jsonwebtoken');
 
 const authorize = function(req, res, next) {

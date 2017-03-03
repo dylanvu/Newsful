@@ -6,7 +6,7 @@ class Bookmarks extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {articles: []}
+    this.state = {bookmarks: []}
   }
 
   componentDidMount() {

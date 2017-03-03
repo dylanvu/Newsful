@@ -58,10 +58,7 @@ class Container extends Component {
         { this.props.children
           ? React.cloneElement(
               this.props.children,
-              {
-                handleLogin: this.handleLogin,
-                handleClick: this.handleClick
-              }
+              {handleLogin: this.handleLogin}
             )
           : null }
       </div>
