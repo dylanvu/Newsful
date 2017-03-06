@@ -8,6 +8,9 @@ h2 {
   margin-top: 0;
 }
 
+h1, h2, a {
+  color: #55B660;
+}
 /*
 input {
   display: block;
