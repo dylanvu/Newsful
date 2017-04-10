@@ -1,6 +1,7 @@
 #Newsful
 Creaed by: Dylan Vu and Will Helton
-https://newsful.herokuapp.com/register
+
+https://newsful.herokuapp.com
 
 ##Project Description
 
