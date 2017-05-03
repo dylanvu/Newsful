@@ -1,7 +1,10 @@
-# [Newsful](https://newsful.herokuapp.com)
+# Newsful
 
 ### About
 Newsful is a minimal news aggregator that lets you quickly view and bookmark the newest articles from all of your favorite news sources.
+
+### Demo
+TBD
 
 ### Features
 - Subscribe to up to 60 different new sources.
