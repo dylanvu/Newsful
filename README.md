@@ -16,6 +16,9 @@ Newsful is a minimal news aggregator that lets you quickly view and bookmark the
 - PostgreSQL
 - CSS
 
+### API
+[News API](https://newsapi.org)
+
 ### Contributors
 | ![alt text](https://avatars3.githubusercontent.com/u/16613572?v=3&s=300 "Dylan Vu") | ![alt text](https://media.licdn.com/mpr/mpr/shrinknp_300_300/AAEAAQAAAAAAAAl5AAAAJDlhMDQ2YzU1LTc1NDEtNDZhNy04YTQ5LWQ4YzBmYTM4Y2ZhYg.jpg "William Helton") |
 |:---:|:---:|
