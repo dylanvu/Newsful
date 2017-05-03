@@ -1,33 +1,23 @@
-#Newsful
+# [Newsful](https://newsful.herokuapp.com)
 
-Creaed by: Dylan Vu and Will Helton
+### About
+Newsful is a minimal news aggregator that lets you quickly view and bookmark the newest articles from all of your favorite news sources.
 
-https://newsful.herokuapp.com
+### Features
+- Subscribe to up to 60 different new sources.
+- Bookmark articles to read later or remove them if they were already read.
 
-##Project Description
+### Technology
+- React
+- React-Bootstrap
+- Node.js
+- Express
+- Knex.js
+- PostgreSQL
+- CSS
 
-Newsful is a news aggregator that lets you quickly view and bookmark the newest articles from all of your favorite news sources.
-
-
-###What problem does it solve?
-
-Most people get their news from multiple sources. It can be slow to visit every different news website that you follow individually.
-
-
-###How does the game solve this problem?
-
-With Newsful you can easily view breaking news from up to 60 different sources on one page. You can also bookmark interesting articles that you don't have time to read now for later.
-
-
-###What technologies does it use?
-
-1. React
-2. React-Bootstrap
-3. Node.js
-4. ExpressJS
-5. Knex.js
-6. PostgreSQL
-7. Axios
-8. JavaScript
-9. HTML
-10. CSS
+### Contributors
+| ![alt text](https://avatars3.githubusercontent.com/u/16613572?v=3&s=300 "Dylan Vu") | ![alt text](https://media.licdn.com/mpr/mpr/shrinknp_300_300/AAEAAQAAAAAAAAl5AAAAJDlhMDQ2YzU1LTc1NDEtNDZhNy04YTQ5LWQ4YzBmYTM4Y2ZhYg.jpg "William Helton") |
+|:---:|:---:|
+| Dylan Vu | William Helton |
+| [@dylanvu](https://github.com/dylanvu) | [@will-206](https://github.com/will-206) |
